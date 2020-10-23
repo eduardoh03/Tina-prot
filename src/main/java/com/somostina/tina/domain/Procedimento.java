@@ -1,8 +1,6 @@
 package com.somostina.tina.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Procedimento implements Serializable {
@@ -23,22 +19,22 @@ public class Procedimento implements Serializable {
 	private Integer id;
 	private String nome;
 	private Double preco;
+	
+	@ManyToOne
+	@JoinTable(name = "PROCEDIMENTO_SERVICO", 
+	joinColumns = @JoinColumn(name="procedimento_id"),
+	inverseJoinColumns = @JoinColumn(name="servico_id"))
+	private Servico servico;
 
-	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "SERVICO_PROCEDIMENTO", 
-	joinColumns = @JoinColumn(name = "procedimento_id"), 
-	inverseJoinColumns = @JoinColumn(name = "servico_id"))
-	private List<Servico> servicos = new ArrayList<>();
-
-	public Procedimento() {
+	public Procedimento() {		
 	}
 
-	public Procedimento(Integer id, String nome, Double preco) {
+	public Procedimento(Integer id, String nome, Double preco, Servico servico) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+		this.servico = servico;
 	}
 
 	public Integer getId() {
@@ -65,12 +61,12 @@ public class Procedimento implements Serializable {
 		this.preco = preco;
 	}
 
-	public List<Servico> getServicos() {
-		return servicos;
+	public Servico getServico() {
+		return servico;
 	}
 
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
 	@Override
