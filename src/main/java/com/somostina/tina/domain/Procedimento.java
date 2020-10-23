@@ -8,27 +8,37 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Servico implements Serializable {
+public class Procedimento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private Double preco;
 
-	@ManyToMany(mappedBy = "servicos")
-	private List<Procedimento> procedimentos = new ArrayList<>();
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "SERVICO_PROCEDIMENTO", 
+	joinColumns = @JoinColumn(name = "procedimento_id"), 
+	inverseJoinColumns = @JoinColumn(name = "servico_id"))
+	private List<Servico> servicos = new ArrayList<>();
 
-	public Servico() {
+	public Procedimento() {
 	}
 
-	public Servico(Integer id, String nome) {
+	public Procedimento(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.preco = preco;
 	}
 
 	public Integer getId() {
@@ -47,12 +57,20 @@ public class Servico implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Procedimento> getProcedimentos() {
-		return procedimentos;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setProcedimentos(List<Procedimento> procedimentos) {
-		this.procedimentos = procedimentos;
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
 	}
 
 	@Override
@@ -71,7 +89,7 @@ public class Servico implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Servico other = (Servico) obj;
+		Procedimento other = (Procedimento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

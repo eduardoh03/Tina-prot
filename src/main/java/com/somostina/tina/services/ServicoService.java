@@ -7,15 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.somostina.tina.domain.Servico;
 import com.somostina.tina.repositories.ServicoRepository;
+import com.somostina.tina.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ServicoService {
-	
+
 	@Autowired
 	private ServicoRepository repo;
-	
+
 	public Servico find(Integer id) {
 		Optional<Servico> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + 
+				", Tipo: " + Servico.class.getName()));
 	}
 }

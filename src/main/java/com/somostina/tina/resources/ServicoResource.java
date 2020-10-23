@@ -11,14 +11,14 @@ import com.somostina.tina.domain.Servico;
 import com.somostina.tina.services.ServicoService;
 
 @RestController
-@RequestMapping(value="/servicos")
+@RequestMapping(value = "/servicos")
 public class ServicoResource {
-	
+
 	@Autowired
 	private ServicoService service;
-	
-	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Servico> find(@PathVariable Integer id) {
 		Servico obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 
