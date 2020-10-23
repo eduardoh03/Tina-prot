@@ -41,7 +41,6 @@ public class Servico implements Serializable{
 		this.nome = nome;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
