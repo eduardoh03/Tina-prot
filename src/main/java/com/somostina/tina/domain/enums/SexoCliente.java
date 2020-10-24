@@ -1,9 +1,9 @@
-package com.somostina.tina.domain;
+package com.somostina.tina.domain.enums;
 
 public enum SexoCliente {
 
-	MASCULINO(1,"Masculino"),
-	FEMININO(2,"Feminino");
+	MASCULINO(1,"MASCULINO"),
+	FEMININO(2,"FEMININO");
 	
 	private int cod;
 	private String descricao;
@@ -20,20 +20,17 @@ public enum SexoCliente {
 	public String getDescricao() {
 		return descricao;
 	}
-
+	
 	public static SexoCliente toEnum(Integer cod) {
-
 		if (cod == null) {
 			return null;
 		}
-
-		for ( SexoCliente x :  SexoCliente.values()) {
-			if (cod.equals(x.getCod())) {
+		for (SexoCliente x : SexoCliente.values()) {
+			if(cod.equals(x.getCod())) {
 				return x;
 			}
 		}
-
-		throw new IllegalArgumentException("Id inválido: " + cod);
+		throw new IllegalArgumentException("Id inválido " + cod);
 	}
 	
 }

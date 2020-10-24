@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.somostina.tina.domain.enums.SexoCliente;
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,11 +27,13 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
-	public Cliente() {
-		
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	public Cliente() {		
 	}
 	
-	public Cliente(Integer id, String nome, String email, String telefone, String cpf, SexoCliente sexo) {
+	public Cliente(Integer id, String nome, String email, 
+			String telefone, String cpf, SexoCliente sexo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -79,12 +83,12 @@ public class Cliente implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Integer getSexo() {
-		return sexo;
+	public SexoCliente getSexo() {
+		return SexoCliente.toEnum(sexo);
 	}
 
-	public void setSexo(Integer sexo) {
-		this.sexo = sexo;
+	public void setSexo(SexoCliente sexo) {
+		this.sexo = sexo.getCod();
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -94,7 +98,13 @@ public class Cliente implements Serializable {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-
+	
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
