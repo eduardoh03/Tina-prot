@@ -8,10 +8,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.somostina.tina.domain.Cidade;
+import com.somostina.tina.domain.Cliente;
+import com.somostina.tina.domain.Endereco;
 import com.somostina.tina.domain.Estado;
 import com.somostina.tina.domain.Procedimento;
 import com.somostina.tina.domain.Servico;
+import com.somostina.tina.domain.SexoCliente;
 import com.somostina.tina.repositories.CidadeRepository;
+import com.somostina.tina.repositories.ClienteRepository;
+import com.somostina.tina.repositories.EnderecoRepository;
 import com.somostina.tina.repositories.EstadoRepository;
 import com.somostina.tina.repositories.ProcedimentoRepository;
 import com.somostina.tina.repositories.ServicoRepository;
@@ -27,6 +32,10 @@ public class TinaApplication implements CommandLineRunner {
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TinaApplication.class, args);		
@@ -58,6 +67,16 @@ public class TinaApplication implements CommandLineRunner {
 
 			estadoRepository.saveAll(Arrays.asList(est1, est2));
 			cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+			
+			Cliente cli1 = new Cliente(null, "Eduardo Henrique", "eduhenriquesrs@gmail.com","(89) 99921-7065" ,"36378912377", SexoCliente.MASCULINO);
+ 
+			Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
+			Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+
+			cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+			clienteRepository.saveAll(Arrays.asList(cli1));
+			enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		}
 
 }
