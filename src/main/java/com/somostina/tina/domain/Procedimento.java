@@ -1,6 +1,10 @@
 package com.somostina.tina.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Procedimento implements Serializable {
@@ -26,6 +31,9 @@ public class Procedimento implements Serializable {
 	inverseJoinColumns = @JoinColumn(name="servico_id"))
 	private Servico servico;
 
+	@OneToMany(mappedBy = "id.procedimento")
+	private Set<ItemPedido> itens = new HashSet<>();
+	
 	public Procedimento() {		
 	}
 
@@ -68,7 +76,22 @@ public class Procedimento implements Serializable {
 	public void setServico(Servico servico) {
 		this.servico = servico;
 	}
+	
+	public List<Pedido> getpedidos(){
+		List<Pedido> lista = new ArrayList<>();
+		for(ItemPedido x : itens) {
+			lista.add(x.getPedido());
+		}
+		return lista;
+	}
+	
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
 
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
