@@ -22,7 +22,6 @@ public class Servico implements Serializable {
 	@OneToMany(mappedBy = "servico")
 	private List<Procedimento> procedimentos = new ArrayList<>();
 
-
 	public Servico() {
 		super();
 	}
@@ -81,11 +80,5 @@ public class Servico implements Serializable {
 			return false;
 		return true;
 	}
-
-	
-
-	
-
-	
 
 }

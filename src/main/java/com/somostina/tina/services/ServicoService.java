@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.somostina.tina.domain.Servico;
+import com.somostina.tina.domain.dto.ServicoDTO;
 import com.somostina.tina.repositories.ServicoRepository;
 import com.somostina.tina.services.exceptions.DataIntegrityException;
 import com.somostina.tina.services.exceptions.ObjectNotFoundException;
@@ -45,5 +46,9 @@ public class ServicoService {
 	
 	public List<Servico> findAll(){
 		return repo.findAll();
+	}
+	
+	public Servico fromDTO(ServicoDTO objDto) {
+		return new Servico(objDto.getId(),objDto.getNome());
 	}
 }
