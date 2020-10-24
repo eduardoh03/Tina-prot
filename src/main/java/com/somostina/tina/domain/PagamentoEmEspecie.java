@@ -4,11 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.somostina.tina.domain.enums.EstadoPagamento;
 
 @Entity
 public class PagamentoEmEspecie extends Pagamento{
 	private static final long serialVersionUID = 1L;
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataPagamento;
 	
 	public PagamentoEmEspecie() {		

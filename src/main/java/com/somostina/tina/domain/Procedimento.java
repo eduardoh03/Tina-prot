@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Procedimento implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,12 +27,14 @@ public class Procedimento implements Serializable {
 	private String nome;
 	private Double preco;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinTable(name = "PROCEDIMENTO_SERVICO", 
 	joinColumns = @JoinColumn(name="procedimento_id"),
 	inverseJoinColumns = @JoinColumn(name="servico_id"))
 	private Servico servico;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.procedimento")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
@@ -76,7 +80,7 @@ public class Procedimento implements Serializable {
 	public void setServico(Servico servico) {
 		this.servico = servico;
 	}
-	
+	@JsonIgnore
 	public List<Pedido> getpedidos(){
 		List<Pedido> lista = new ArrayList<>();
 		for(ItemPedido x : itens) {
