@@ -21,4 +21,9 @@ public class ServicoService {
 				"Objeto não encontrado! Id: " + id + 
 				", Tipo: " + Servico.class.getName()));
 	}
+	
+	public Servico insert(Servico obj) {
+		obj.setId(null);//impedir que seja uma atualização
+		return repo.save(obj);
+	}
 }
