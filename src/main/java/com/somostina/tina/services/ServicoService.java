@@ -31,8 +31,9 @@ public class ServicoService {
 	}
 
 	public Servico update(Servico obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Servico newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -50,5 +51,8 @@ public class ServicoService {
 	
 	public Servico fromDTO(ServicoDTO objDto) {
 		return new Servico(objDto.getId(),objDto.getNome());
+	}
+	private void updateData(Servico newObj, Servico obj) {
+		newObj.setNome(obj.getNome());
 	}
 }
