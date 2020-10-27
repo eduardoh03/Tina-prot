@@ -8,9 +8,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.somostina.tina.domain.Procedimento;
+import com.somostina.tina.domain.Servico;
 import com.somostina.tina.domain.dto.ProcedimentoDTO;
+import com.somostina.tina.domain.dto.ProcedimentoNewDTO;
 import com.somostina.tina.repositories.ProcedimentoRepository;
-import com.somostina.tina.repositories.ServicoRepository;
 import com.somostina.tina.services.exceptions.DataIntegrityException;
 import com.somostina.tina.services.exceptions.ObjectNotFoundException;
 
@@ -19,8 +20,6 @@ public class ProcedimentoService {
 
 	@Autowired
 	private ProcedimentoRepository repo;
-	@Autowired
-	private ServicoRepository servicoRepository;
 	
 	public Procedimento find(Integer id) {
 		Optional<Procedimento> obj = repo.findById(id);
@@ -31,9 +30,7 @@ public class ProcedimentoService {
 	
 	public Procedimento insert(Procedimento obj) {
 		obj.setId(null);// impedir que seja uma atualização
-		obj = repo.save(obj);
-		servicoRepository.save(obj.getServico());
-		return obj;
+		return repo.save(obj);
 	}
 	
 	public Procedimento update(Procedimento obj) {
@@ -59,6 +56,12 @@ public class ProcedimentoService {
 		return new Procedimento(objDto.getId(),objDto.getNome(), objDto.getPreco(), null);
 	}
 	
+	public Procedimento fromDTO(ProcedimentoNewDTO objDto) {
+		Servico serv = new Servico(objDto.getServicoId(), objDto.getNomeServico());
+		Procedimento proc = new Procedimento(null, objDto.getNome(), objDto.getPreco(), serv);
+		serv.getProcedimentos().add(proc);
+		return proc;
+	}
 	private void updateData(Procedimento newObj, Procedimento obj) {
 		newObj.setNome(obj.getNome());
 		System.out.println(obj.getPreco());
