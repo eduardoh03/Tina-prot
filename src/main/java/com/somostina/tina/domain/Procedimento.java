@@ -28,7 +28,7 @@ public class Procedimento implements Serializable {
 	private Double preco;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne()
 	@JoinTable(name = "PROCEDIMENTO_SERVICO", 
 	joinColumns = @JoinColumn(name="procedimento_id"),
 	inverseJoinColumns = @JoinColumn(name="servico_id"))
@@ -46,7 +46,7 @@ public class Procedimento implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
-		this.servico = servico;
+		this.servico = (servico == null) ? null : servico;
 	}
 
 	public Integer getId() {

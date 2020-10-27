@@ -54,7 +54,7 @@ public class ServicoResource {
 		service.delete(id);
 		return ResponseEntity.ok().build();
 	}
-	
+		
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ServicoDTO>> findAll() {
 		List<Servico> list = service.findAll();

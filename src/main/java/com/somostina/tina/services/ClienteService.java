@@ -60,6 +60,7 @@ public class ClienteService {
 
 	public Cliente fromDTO(ClienteDTO objDto) {
 		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), objDto.getTelefone(),null, null);
+	
 	}
 
 	public Cliente fromDTO(ClienteNewDTO objDto) {		
@@ -75,6 +76,13 @@ public class ClienteService {
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
-		newObj.setTelefone(obj.getTelefone());
+		System.out.println(obj.getTelefone());
+		System.out.println(newObj.getTelefone());
+		if(obj.getTelefone() == null) {
+			System.out.println("NAO ALTERADO");
+		}else {
+			System.out.println("ALTERADO");
+			newObj.setTelefone(obj.getTelefone());
+		}
 	}
 }

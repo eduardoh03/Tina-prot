@@ -109,7 +109,7 @@ public class TinaApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 
-		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 50.00);
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 10.00, 1, 50.00);
 		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 150.00);
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 10.00, 1, 30.00);
 
