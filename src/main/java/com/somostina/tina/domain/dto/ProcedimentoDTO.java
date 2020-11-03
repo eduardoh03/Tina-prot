@@ -2,8 +2,6 @@ package com.somostina.tina.domain.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
-
 import org.hibernate.validator.constraints.Length;
 
 import com.somostina.tina.domain.Procedimento;
@@ -12,7 +10,6 @@ public class ProcedimentoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	@NotEmpty(message = "Preenchimento obrigatorio")
 	@Length(min = 3, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
 	private Double preco;

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +27,10 @@ public class Cliente implements Serializable {
 	private String email;
 	private String telefone;
 	private String cpf;
-	private Integer sexo;
+	@Enumerated(value = EnumType.STRING)
+	private SexoCliente sexo;
 
+	
 	@OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
@@ -44,7 +48,7 @@ public class Cliente implements Serializable {
 		this.email = email;
 		this.telefone = telefone;
 		this.cpf = cpf;
-		this.sexo = (sexo == null) ? null : sexo.getCod();
+		this.sexo = (sexo == null) ? null : sexo;
 	}
 
 	public Integer getId() {
@@ -88,11 +92,11 @@ public class Cliente implements Serializable {
 	}
 
 	public SexoCliente getSexo() {
-		return SexoCliente.toEnum(sexo);
+		return sexo;
 	}
 
 	public void setSexo(SexoCliente sexo) {
-		this.sexo = sexo.getCod();
+		this.sexo = sexo;
 	}
 
 	public List<Endereco> getEnderecos() {

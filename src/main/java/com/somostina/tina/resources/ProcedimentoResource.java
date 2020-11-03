@@ -39,19 +39,19 @@ public class ProcedimentoResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ProcedimentoNewDTO objDto){
-		Procedimento obj = service.fromDTO(objDto);
+	public ResponseEntity<Procedimento> insert(@Valid @RequestBody ProcedimentoNewDTO objDto){
+		Procedimento obj = service.newProced(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(obj);
 	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ProcedimentoDTO objDto, @PathVariable Integer id){
+	public ResponseEntity<Procedimento> update(@Valid @RequestBody ProcedimentoDTO objDto, @PathVariable Integer id){
 		Procedimento obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok().body(obj);
 	}	
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

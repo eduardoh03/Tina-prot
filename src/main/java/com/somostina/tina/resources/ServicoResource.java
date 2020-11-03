@@ -31,34 +31,34 @@ public class ServicoResource {
 		Servico obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-		
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<ServicoDTO>> findAll() {
+		List<Servico> list = service.findAll();
+		List<ServicoDTO> listDto = list.stream().map(obj -> new ServicoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ServicoDTO objDto){
+	public ResponseEntity<Servico> insert(@Valid @RequestBody ServicoDTO objDto){
 		Servico obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(obj);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ServicoDTO objDto, @PathVariable Integer id){
+	public ResponseEntity<Servico> update(@Valid @RequestBody ServicoDTO objDto, @PathVariable Integer id){
 		Servico obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.ok().build();
-	}
-		
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<ServicoDTO>> findAll() {
-		List<Servico> list = service.findAll();
-		List<ServicoDTO> listDto = list.stream().map(obj -> new ServicoDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
 	}
 }

@@ -9,7 +9,7 @@ public class ProcedimentoNewDTO implements Serializable {
 	private String nome;
 	private Double preco;
 	//servico
-	private String nomeServico;
+
 	private Integer servicoId;
 	
 	public ProcedimentoNewDTO() {
@@ -32,13 +32,6 @@ public class ProcedimentoNewDTO implements Serializable {
 		this.preco = preco;
 	}
 
-	public String getNomeServico() {
-		return nomeServico;
-	}
-
-	public void setNomeServico(String nomeServico) {
-		this.nomeServico = nomeServico;
-	}
 
 	public Integer getServicoId() {
 		return servicoId;

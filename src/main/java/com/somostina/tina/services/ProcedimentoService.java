@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import com.somostina.tina.domain.Procedimento;
@@ -29,8 +30,13 @@ public class ProcedimentoService {
 	}
 	
 	public Procedimento insert(Procedimento obj) {
-		obj.setId(null);// impedir que seja uma atualização
-		return repo.save(obj);
+		obj.setId(null);
+		try {
+			repo.save(obj);
+		} catch (InvalidDataAccessApiUsageException e) {
+			throw new InvalidDataAccessApiUsageException("Não é possivel criar um Procedimento sem relaciona-lo a um Serviço valido");
+		}
+		return obj;
 	}
 	
 	public Procedimento update(Procedimento obj) {
@@ -56,20 +62,19 @@ public class ProcedimentoService {
 		return new Procedimento(objDto.getId(),objDto.getNome(), objDto.getPreco(), null);
 	}
 	
-	public Procedimento fromDTO(ProcedimentoNewDTO objDto) {
-		Servico serv = new Servico(objDto.getServicoId(), objDto.getNomeServico());
+	public Procedimento newProced(ProcedimentoNewDTO objDto) {
+		Servico serv = new Servico(objDto.getServicoId(), null);
 		Procedimento proc = new Procedimento(null, objDto.getNome(), objDto.getPreco(), serv);
 		serv.getProcedimentos().add(proc);
 		return proc;
 	}
 	private void updateData(Procedimento newObj, Procedimento obj) {
-		newObj.setNome(obj.getNome());
-		System.out.println(obj.getPreco());
-		System.out.println(newObj.getPreco());
-		if(obj.getPreco() == null) {
-			System.out.println("NAO ALTERADO");
+		if(obj.getNome() == null) {
 		}else {
-			System.out.println("ALTERADO");
+			newObj.setNome(obj.getNome());
+		}
+		if(obj.getPreco() == null) {
+		}else {
 			newObj.setPreco(obj.getPreco());
 		}
 	}

@@ -26,7 +26,7 @@ public class ServicoService {
 	}
 
 	public Servico insert(Servico obj) {
-		obj.setId(null);// impedir que seja uma atualização
+		obj.setId(null);
 		return repo.save(obj);
 	}
 

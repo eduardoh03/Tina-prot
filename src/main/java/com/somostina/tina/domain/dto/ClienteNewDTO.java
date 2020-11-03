@@ -2,6 +2,11 @@ package com.somostina.tina.domain.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.somostina.tina.domain.enums.SexoCliente;
+
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//cliente
@@ -9,7 +14,8 @@ public class ClienteNewDTO implements Serializable {
 	private String email;
 	private String telefone;
 	private String cpf;
-	private Integer sexo;
+	@Enumerated(value = EnumType.STRING)
+	private SexoCliente sexo;
 	//endereco
 	private String logradouro;
 	private String numero;
@@ -46,11 +52,11 @@ public class ClienteNewDTO implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Integer getSexo() {
+	public SexoCliente getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(Integer sexo) {
+	public void setSexo(SexoCliente sexo) {
 		this.sexo = sexo;
 	}
 
