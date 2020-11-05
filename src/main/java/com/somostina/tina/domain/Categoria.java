@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Servico implements Serializable {
+public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -19,14 +19,14 @@ public class Servico implements Serializable {
 	private Integer id;
 	private String nome;
 
-	@OneToMany(mappedBy = "servico")
+	@OneToMany(mappedBy = "categoria")
 	private List<Procedimento> procedimentos = new ArrayList<>();
 
-	public Servico() {
+	public Categoria() {
 		super();
 	}
 
-	public Servico(Integer id, String nome) {
+	public Categoria(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -72,7 +72,7 @@ public class Servico implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Servico other = (Servico) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

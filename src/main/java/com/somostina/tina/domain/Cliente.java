@@ -29,7 +29,7 @@ public class Cliente implements Serializable {
 	private String cpf;
 	@Enumerated(value = EnumType.STRING)
 	private SexoCliente sexo;
-
+	
 	
 	@OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();

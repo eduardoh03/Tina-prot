@@ -7,31 +7,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.somostina.tina.domain.Servico;
-import com.somostina.tina.domain.dto.ServicoDTO;
-import com.somostina.tina.repositories.ServicoRepository;
+import com.somostina.tina.domain.Categoria;
+import com.somostina.tina.domain.dto.CategoriaDTO;
+import com.somostina.tina.repositories.CategoriaRepository;
 import com.somostina.tina.services.exceptions.DataIntegrityException;
 import com.somostina.tina.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class ServicoService {
+public class CategoriaService {
 
 	@Autowired
-	private ServicoRepository repo;
+	private CategoriaRepository repo;
 
-	public Servico find(Integer id) {
-		Optional<Servico> obj = repo.findById(id);
+	public Categoria find(Integer id) {
+		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Servico.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
-	public Servico insert(Servico obj) {
+	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
 
-	public Servico update(Servico obj) {
-		Servico newObj = find(obj.getId());
+	public Categoria update(Categoria obj) {
+		Categoria newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);
 	}
@@ -45,14 +45,14 @@ public class ServicoService {
 		}
 	}
 	
-	public List<Servico> findAll(){
+	public List<Categoria> findAll(){
 		return repo.findAll();
 	}
 	
-	public Servico fromDTO(ServicoDTO objDto) {
-		return new Servico(objDto.getId(),objDto.getNome());
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(),objDto.getNome());
 	}
-	private void updateData(Servico newObj, Servico obj) {
+	private void updateData(Categoria newObj, Categoria obj) {
 		newObj.setNome(obj.getNome());
 	}
 }

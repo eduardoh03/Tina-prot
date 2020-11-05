@@ -9,7 +9,7 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import com.somostina.tina.domain.Procedimento;
-import com.somostina.tina.domain.Servico;
+import com.somostina.tina.domain.Categoria;
 import com.somostina.tina.domain.dto.ProcedimentoDTO;
 import com.somostina.tina.domain.dto.ProcedimentoNewDTO;
 import com.somostina.tina.repositories.ProcedimentoRepository;
@@ -63,7 +63,7 @@ public class ProcedimentoService {
 	}
 	
 	public Procedimento newProced(ProcedimentoNewDTO objDto) {
-		Servico serv = new Servico(objDto.getServicoId(), null);
+		Categoria serv = new Categoria(objDto.getCategoriaId(), null);
 		Procedimento proc = new Procedimento(null, objDto.getNome(), objDto.getPreco(), serv);
 		serv.getProcedimentos().add(proc);
 		return proc;

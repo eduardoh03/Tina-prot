@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.somostina.tina.domain.Categoria;
 import com.somostina.tina.domain.Cidade;
 import com.somostina.tina.domain.Cliente;
 import com.somostina.tina.domain.Endereco;
@@ -18,9 +19,9 @@ import com.somostina.tina.domain.PagamentoComCartao;
 import com.somostina.tina.domain.PagamentoEmEspecie;
 import com.somostina.tina.domain.Pedido;
 import com.somostina.tina.domain.Procedimento;
-import com.somostina.tina.domain.Servico;
 import com.somostina.tina.domain.enums.EstadoPagamento;
 import com.somostina.tina.domain.enums.SexoCliente;
+import com.somostina.tina.repositories.CategoriaRepository;
 import com.somostina.tina.repositories.CidadeRepository;
 import com.somostina.tina.repositories.ClienteRepository;
 import com.somostina.tina.repositories.EnderecoRepository;
@@ -29,13 +30,12 @@ import com.somostina.tina.repositories.ItemPedidoRepository;
 import com.somostina.tina.repositories.PagamentoRepository;
 import com.somostina.tina.repositories.PedidoRepository;
 import com.somostina.tina.repositories.ProcedimentoRepository;
-import com.somostina.tina.repositories.ServicoRepository;
 
 @SpringBootApplication
 public class TinaApplication implements CommandLineRunner {
 
 	@Autowired
-	private ServicoRepository servicoRepository;
+	private CategoriaRepository categoriaRepository;
 	@Autowired
 	private ProcedimentoRepository procedimentoRepository;
 	@Autowired
@@ -59,8 +59,8 @@ public class TinaApplication implements CommandLineRunner {
 
 	public void run(String... args) throws Exception {
 
-		Servico serv1 = new Servico(null, "Cabelo");
-		Servico serv2 = new Servico(null, "Maquiagem");
+		Categoria serv1 = new Categoria(null, "Cabelo");
+		Categoria serv2 = new Categoria(null, "Maquiagem");
 
 		Procedimento p1 = new Procedimento(null, "Corte Feminino", 50.00, serv1);
 		Procedimento p2 = new Procedimento(null, "Corte Masculino", 30.00, serv1);
@@ -68,7 +68,7 @@ public class TinaApplication implements CommandLineRunner {
 		Procedimento p4 = new Procedimento(null, "Maquiagem Artistica", 200.00, serv2);
 		Procedimento p5 = new Procedimento(null, "Maquiagem + Cílios", 150.00, serv2);
 
-		servicoRepository.saveAll(Arrays.asList(serv1, serv2));
+		categoriaRepository.saveAll(Arrays.asList(serv1, serv2));
 		procedimentoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
 		Estado est1 = new Estado(null, "Piauí");

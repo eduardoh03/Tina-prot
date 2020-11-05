@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class ProcedimentoNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//procedimento
+
+	// procedimento
 	private String nome;
 	private Double preco;
-	//servico
+	// categoria
 
-	private Integer servicoId;
-	
+	private Integer categoriaId;
+
 	public ProcedimentoNewDTO() {
-		
+
 	}
 
 	public String getNome() {
@@ -32,13 +32,12 @@ public class ProcedimentoNewDTO implements Serializable {
 		this.preco = preco;
 	}
 
-
-	public Integer getServicoId() {
-		return servicoId;
+	public Integer getCategoriaId() {
+		return categoriaId;
 	}
 
-	public void setServicoId(Integer servicoId) {
-		this.servicoId = servicoId;
+	public void setCategoriaId(Integer categoriaId) {
+		this.categoriaId = categoriaId;
 	}
-	
+
 }

@@ -29,10 +29,10 @@ public class Procedimento implements Serializable {
 	
 	@JsonIgnore
 	@ManyToOne()
-	@JoinTable(name = "PROCEDIMENTO_SERVICO", 
+	@JoinTable(name = "PROCEDIMENTO_CATEGORIA", 
 	joinColumns = @JoinColumn(name="procedimento_id"),
-	inverseJoinColumns = @JoinColumn(name="servico_id"))
-	private Servico servico;
+	inverseJoinColumns = @JoinColumn(name="categoria_id"))
+	private Categoria categoria;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.procedimento")
@@ -41,12 +41,12 @@ public class Procedimento implements Serializable {
 	public Procedimento() {		
 	}
 
-	public Procedimento(Integer id, String nome, Double preco, Servico servico) {
+	public Procedimento(Integer id, String nome, Double preco, Categoria categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
-		this.servico = (servico == null) ? null : servico;
+		this.categoria = (categoria == null) ? null : categoria;
 	}
 
 	public Integer getId() {
@@ -73,13 +73,14 @@ public class Procedimento implements Serializable {
 		this.preco = preco;
 	}
 
-	public Servico getServico() {
-		return servico;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setServico(Servico servico) {
-		this.servico = servico;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
+
 	@JsonIgnore
 	public List<Pedido> getpedidos(){
 		List<Pedido> lista = new ArrayList<>();
