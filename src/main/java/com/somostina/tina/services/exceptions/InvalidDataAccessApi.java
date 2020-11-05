@@ -7,8 +7,5 @@ public class InvalidDataAccessApi extends RuntimeException {
 		super(msg);
 	}
 
-	public InvalidDataAccessApi(String msg, Throwable cause) {
-		super(msg, cause);
-	}
 
 }

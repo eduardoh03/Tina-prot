@@ -1,19 +1,16 @@
 package com.somostina.tina.resources.exception;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class StandardError implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer status;
 	private String msg;
-	private Long timeStamp;
+	private LocalDateTime timeStamp;
 
-	public StandardError(Integer status, String msg, Long timeStamp) {
-		super();
-		this.status = status;
-		this.msg = msg;
-		this.timeStamp = timeStamp;
+	public StandardError() {
 	}
 
 	public Integer getStatus() {
@@ -32,11 +29,12 @@ public class StandardError implements Serializable {
 		this.msg = msg;
 	}
 
-	public Long getTimeStamp() {
+	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(Long timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setTimeStamp(LocalDateTime dataHoraSP) {
+		this.timeStamp = dataHoraSP;
 	}
+	
 }
