@@ -60,14 +60,15 @@ public class TinaApplication implements CommandLineRunner {
 
 		Categoria serv1 = new Categoria(null, "Cabelo");
 		Categoria serv2 = new Categoria(null, "Maquiagem");
-
+		Categoria serv3 = new Categoria(null, "Massagem");
+		
 		Procedimento p1 = new Procedimento(null, "Corte Feminino", 50.00, serv1);
 		Procedimento p2 = new Procedimento(null, "Corte Masculino", 30.00, serv1);
 		Procedimento p3 = new Procedimento(null, "Hidratação", 150.00, serv1);
 		Procedimento p4 = new Procedimento(null, "Maquiagem Artistica", 200.00, serv2);
 		Procedimento p5 = new Procedimento(null, "Maquiagem + Cílios", 150.00, serv2);
 
-		categoriaRepository.saveAll(Arrays.asList(serv1, serv2));
+		categoriaRepository.saveAll(Arrays.asList(serv1, serv2, serv3));
 		procedimentoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
 		Estado est1 = new Estado(null, "Piauí");
