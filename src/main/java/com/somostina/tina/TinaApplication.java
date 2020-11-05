@@ -16,7 +16,6 @@ import com.somostina.tina.domain.Estado;
 import com.somostina.tina.domain.ItemPedido;
 import com.somostina.tina.domain.Pagamento;
 import com.somostina.tina.domain.PagamentoComCartao;
-import com.somostina.tina.domain.PagamentoEmEspecie;
 import com.somostina.tina.domain.Pedido;
 import com.somostina.tina.domain.Procedimento;
 import com.somostina.tina.domain.enums.EstadoPagamento;
@@ -102,7 +101,7 @@ public class TinaApplication implements CommandLineRunner {
 
 		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pagto1);
-		Pagamento pagto2 = new PagamentoEmEspecie(null, EstadoPagamento.QUITADO, ped2, sdf.parse("10/10/2020 16:22"));
+		Pagamento pagto2 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped2, 10);
 		ped2.setPagamento(pagto2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
